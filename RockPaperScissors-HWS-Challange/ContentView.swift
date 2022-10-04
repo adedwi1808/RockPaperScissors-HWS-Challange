@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    private var moves: [String] = ["✋🏻", "✌🏻", "👊🏻"]
+    @State private var computerRandomMove: Int = Int.random(in: 0..<3)
+    @State private var shouldWin: Bool = Bool.random()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            Color.blue
+                .ignoresSafeArea()
         }
-        .padding()
     }
 }
 
