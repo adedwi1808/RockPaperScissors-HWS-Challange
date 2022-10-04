@@ -16,6 +16,37 @@ struct ContentView: View {
         ZStack {
             Color.blue
                 .ignoresSafeArea()
+            
+            VStack {
+                Text("Gerakan Komputer")
+                    .font(.system(size: 30, weight: .bold, design: .default))
+                    .foregroundColor(.white)
+                Text(moves[computerRandomMove])
+                    .font(.system(size: 180))
+                
+            
+                if shouldWin {
+                    Text("Pilihlah gerakan agar menang")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.white)
+                } else {
+                    Text("Pilihlah gerakan agar kalah")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.white)
+                }
+                
+                HStack {
+                    ForEach(moves, id: \.self) { move in
+                        Button {
+                            //
+                        } label: {
+                            Text(move)
+                                .font(.system(size: 60))
+                        }
+                    }
+                }
+            }
+            .padding()
         }
     }
 }
