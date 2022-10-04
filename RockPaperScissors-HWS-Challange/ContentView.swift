@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var shouldWin: Bool = Bool.random()
     @State private var userScore: Int = 0
     @State private var questionCount: Int = 0
+    @State private var gameFinished: Bool = false
     
     var body: some View {
         ZStack {
@@ -48,6 +49,10 @@ struct ContentView: View {
                                 .font(.system(size: 60))
                         }
                     }
+                }.alert("Finish", isPresented: $gameFinished) {
+                    Button("Play Again", action: newGame)
+                } message: {
+                    Text("Your Score Is \(userScore)/100")
                 }
                 
                 Spacer()
@@ -63,22 +68,25 @@ struct ContentView: View {
     
     func answerButtonPressed(_ userAnswer: String) {
         let winningMove: [String] = ["✌🏻", "👊🏻", "✋🏻"]
-        var userWin: Bool = false
         if shouldWin {
-            userWin = userAnswer == winningMove[computerRandomMove] ? true : false
+            userScore += userAnswer == winningMove[computerRandomMove] ? 10 : 0
         } else {
-            userWin = userAnswer == winningMove[computerRandomMove] ? false : true
-        }
-        
-        if userWin {
-            userScore += 10
+            userScore += userAnswer == winningMove[computerRandomMove] ? 0 : 10
         }
         
         if questionCount == 10 {
-            //
+            gameFinished = true
         } else {
             newMove()
         }
+    }
+    
+    func newGame() {
+        gameFinished = false
+        computerRandomMove = Int.random(in: 0..<3)
+        shouldWin.toggle()
+        questionCount = 0
+        userScore = 0
     }
     
     func newMove() {
