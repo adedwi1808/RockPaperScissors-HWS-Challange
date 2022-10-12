@@ -18,13 +18,13 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color.blue
+            RadialGradient(stops: [.init(color: .cyan, location: 0.1), .init(color: .mint, location: 0.9)], center: .center, startRadius: 100, endRadius: 300)
                 .ignoresSafeArea()
             
             VStack {
                 Spacer()
                 Text("Gerakan Komputer")
-                    .font(.system(size: 30, weight: .bold, design: .default))
+                    .font(.system(size: 40, weight: .bold, design: .default))
                     .foregroundColor(.white)
                 Text(moves[computerRandomMove])
                     .font(.system(size: 180))
@@ -32,7 +32,7 @@ struct ContentView: View {
             
                 if shouldWin {
                     Text("Pilihlah gerakan agar menang")
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.system(size: 23, weight: .medium))
                     .foregroundColor(.white)
                 } else {
                     Text("Pilihlah gerakan agar kalah")
@@ -40,6 +40,7 @@ struct ContentView: View {
                     .foregroundColor(.white)
                 }
                 
+                Spacer()
                 HStack {
                     ForEach(moves, id: \.self) { move in
                         Button {
